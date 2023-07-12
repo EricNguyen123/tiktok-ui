@@ -15,7 +15,7 @@ function AccountItem({ data }) {
         return (
             <div tabIndex="-1" {...props}>
                 <PopperWrapper>
-                    <AccountPreview />
+                    <AccountPreview data={data} />
                 </PopperWrapper>
             </div>
         );
@@ -24,17 +24,13 @@ function AccountItem({ data }) {
         <div>
             <Tippy interactive delay={[800, 0]} offset={[-20, 0]} placement="bottom" render={renderPreview}>
                 <div className={cx('account-item')}>
-                    <Image
-                        className={cx('avatar')}
-                        src="https://antimatter.vn/wp-content/uploads/2023/01/hinh-anh-avatar-dep-cute-ngau-601x600.jpg"
-                        alt=""
-                    />
+                    <Image className={cx('avatar')} src={data.avatar} alt="" />
                     <div className={cx('info')}>
                         <h4 className={cx('name')}>
-                            <span>Nguyen Van A</span>
-                            <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />
+                            <span>{data.nickname}</span>
+                            {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />}
                         </h4>
-                        <span className={cx('username')}>anguyen</span>
+                        <span className={cx('username')}>{`${data.first_name} ${data.last_name}`}</span>
                     </div>
                 </div>
             </Tippy>
@@ -42,6 +38,8 @@ function AccountItem({ data }) {
     );
 }
 
-AccountItem.propTypes = {};
+AccountItem.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 
 export default AccountItem;
