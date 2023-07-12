@@ -11,8 +11,10 @@ import {
     LiveIcon,
     LiveActiveIcon,
 } from '~/components/Icons';
-import SuggestedAccounts from '~/components/SuggestedAccounts/SuggestedAccounts';
+import SuggestedAccounts from '~/components/SuggestedAccounts';
+// import FollowedAccounts from '~/components/FollowedAccounts';
 import * as userService from '~/services/userServices';
+// import * as followedUserService from '~/services/followedUserServices';
 
 const cx = classNames.bind(styles);
 
@@ -23,6 +25,8 @@ function Sidebar() {
     const [isSeeAll, setIsSeeAll] = useState(false);
     const [page, setPage] = useState(INIT_PAGE);
     const [suggestedUsers, setSuggestedUsers] = useState([]);
+    // const [followedUsers, setFollowedUsers] = useState([]);
+    // const [pageFollow, setPageFollow] = useState(INIT_PAGE);
 
     useEffect(() => {
         userService
@@ -33,6 +37,15 @@ function Sidebar() {
             .catch((error) => {
                 console.log(error);
             });
+
+        // followedUserService
+        //     .getFollowed({ page })
+        //     .then((data) => {
+        //         setFollowedUsers(data);
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
     }, [page]);
 
     const handleViewChange = () => {
@@ -67,7 +80,12 @@ function Sidebar() {
                 isSeeAll={isSeeAll}
                 onViewChange={handleViewChange}
             />
-            <SuggestedAccounts label="Following accounts" />
+            {/* <FollowedAccounts
+                label="Following accounts"
+                data={followedUsers}
+                isSeeAll={isSeeAll}
+                onViewChange={handleViewChange}
+            /> */}
         </aside>
     );
 }
